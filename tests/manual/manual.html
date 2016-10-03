@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <title>VideoJS Workbench</title>
+    <link rel="stylesheet" href="css/reset.css"/> 
+    <link rel="stylesheet" href="css/styles.css"/> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    <script type="text/javascript" src="js/video.js"></script>
+  </head>
+  
+  <body style="background-color:#dbdbdb; padding:50px;">
+
+    <section id="status" style="display: none;">
+      <div class="tab-control">
+              <ul class="tabs clearfix">
+                <li>
+                  <a class="selected" href="#events">Events</a>
+                </li>
+                <li>
+                  <a href="#errorEvents">Error Events</a>
+                </li>
+                <li>
+                  <a href="#properties">Properties</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="events">
+
+              </div>
+              <div class="tab-content" id="errorEvents">
+
+              </div>
+              <div class="tab-content" id="properties">
+                <table id="propertiesTable">
+                  <tr>
+                    <td colspan="2" class="value" id="propCurrentSrc"></td>
+                  </tr>
+                  <tr>
+                    <td class="prop">currentTime</td>
+                    <td class="value" id="propCurrentTime">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">time</td>
+                    <td class="value" id="propTime">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">defaultPlaybackRate</td>
+                    <td class="value" id="propDefaultPlaybackRate">1</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">duration</td>
+                    <td class="value" id="propDuration">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">ended</td>
+                    <td class="value" id="propEnded">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">paused</td>
+                    <td class="value" id="propPaused">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">muted</td>
+                    <td class="value" id="propMuted">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">volume</td>
+                    <td class="value" id="propVolume">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">seeking</td>
+                    <td class="value" id="propSeeking">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">networkState</td>
+                    <td class="value" id="propNetworkState">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">readyState</td>
+                    <td class="value" id="propReadyState">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">bufferedBytesStart</td>
+                    <td class="value" id="propBufferedBytesStart">0</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">bufferedBytesEnd</td>
+                    <td class="value" id="propBufferedBytesEnd">n/a</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">bytesTotal</td>
+                    <td class="value" id="propBytesTotal">0</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">videoWidth</td>
+                    <td class="value" id="propVideoWidth">0</td>
+                  </tr>
+                  <tr>
+                    <td class="prop">videoHeight</td>
+                    <td class="value" id="propVideoHeight">0</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+    </section>
+
+    <section>
+      <div class="row">
+        
+        <div class="span4">
+          <div id="videoPlayerWrapper">
+            <div id="videoPlayer"></div>
+          </div>
+        </div> 
+      </div>
+
+      <div class="row" style="margin-left: -2px;
+                      background: rgba(128, 128, 128, 0.25);
+                      border: 1px solid gray;
+                      border-radius: 65px;
+                      padding-left: 20px;
+                      width: 52%;
+                      margin-top: 0px;
+                      height: 50px;">
+
+        <div id="control" class="">
+          <a id="btnPause" href="#" style="text-decoration: none;">
+            <img src="/static/images/pause.png" height="50px" />
+          </a>
+          <a id="btnResume" href="#" style="text-decoration: none;">
+            <img src="/static/images/play.png" height="50px"/>
+          </a>
+          <a id="btnSeek5" href="#" style="text-decoration: none;">
+            <img src="/static/images/forward.png" height="50px" />
+          </a>
+          <a id="btnEnlarge" href="#" style="text-decoration: none;">
+            <img src="/static/images/max.png" height="50px"/>
+          </a> 
+          <a id="btnReduce" href="#" style="text-decoration: none;">
+            <img src="/static/images/min.png" height="50px" />
+          </a>
+        </div>
+
+
+      </div>
+    </section>
+  </body>  
+</html>

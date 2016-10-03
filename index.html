@@ -1,0 +1,255 @@
+<html ng-app="zypeApp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        
+        <script src="static/js/lib/angular.js"></script>        
+        <script src="static/js/lib/jquery.js"></script>
+        <script src="static/js/lib/swfobject.js"></script>
+        <script src="static/js/lib/angular-animate.js"></script>
+        <script src="static/js/lib/angular-sanitize.js"></script>
+        <script src="static/js/lib/ui-bootstrap.js"></script>
+        <script src="static/js/lib/handler.js"></script>
+
+        <!-- <script src="static/js/lib/video_hls.js"></script> -->
+
+        <script src="static/js/app.js"></script>
+        <script src="static/js/VideoCtrl.js"></script> 
+        <script src="static/js/ModalCtrl.js"></script>
+
+        <link rel="stylesheet" href="static/css/style.css">
+        <link rel="stylesheet" href="static/css/reset.css"/> 
+        <link rel="stylesheet" href="static/css/player.css"/>
+        <link rel="stylesheet" href="static/css/bootstrap.css"/>
+
+        <title>Zype Player Test</title>
+    </head>
+
+    <body>
+        <div id="ngVideo" ng-controller="VideoCtrl">
+
+            <div class="header-main">
+                <div class="header-left">
+                    Zype Test Video Player
+                </div>
+                <div class="header-right">
+                    Guido Alloatti
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="video" ng-repeat="video in videos">
+
+                    <div class="title">
+                        {{ video.name }} ({{ video.length.hour }}:{{ video.length.min }}:{{ video.length.sec }}) | {{ video.format }}
+                        <a href="" ng-click="video.show_details = !video.show_details">
+                            <img src="static/images/details.png" class="details-image" width="24px" />
+                        </a>
+                    </div>
+
+                    <div ng-show="video.show_details" class="info" id="video_{{ video.id }}">
+                        Id: {{ video.id }}<br>
+                        Name: {{ video.name }}<br>
+                        Duration: {{ video.length.hour }}:{{ video.length.min }}:{{ video.length.sec }}<br>
+                        Link: {{ video.href }}<br>
+                        Format: {{ video.format }}<br>
+                        Status: {{ video.status }}<br>
+                    </div>
+
+                    <div class="player" ng-controller="ModalCtrl as $ctrl">
+                        <a class="openVideo" href="" ng-click="event.preventDefault(); $ctrl.open('lg', video); loadVideoScript();">
+                            <img src="static/images/video_{{ video.id }}.png" width="100%" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="github">
+                    <a href="https://github.com/guidoalloatti" target="_blank"> 
+                        <img src="/static/images/github.png" width="64px" /><br>
+                        Github 
+                    </a>
+                </div>
+                <div class="linkedin">
+                    <a href="https://www.linkedin.com/in/guidoalloatti" target="_blank">
+                        <img src="/static/images/linkedin.png" width="64px" /><br>
+                        Linkedin
+                </div>
+                <div class="gmail">
+                    <a href="mailto:guidoalloatti@gmail.com?Subject=Zype%20Test" target="_top">
+                        <img src="/static/images/gmail.png" width="64px" /><br>
+                        Gmail
+                </div>
+            </div>
+        </div>
+
+        <div id="ngModal" ng-controller="ModalCtrl as $ctrl">
+            <script type="text/ng-template" id="video_content.html">
+                <div class="modal-header">
+                    <input type="hidden" id="video_id" value="{{$ctrl.video.id}}" />
+                    <input type="hidden" id="video_href" value="{{$ctrl.video.href}}" />
+                    <input type="hidden" id="video_length" value="{{ $ctrl.video.length.hour }}:{{ $ctrl.video.length.min }}:{{ $ctrl.video.length.sec }}" />
+                    <input type="hidden" id="video_issues" value="{{ $ctrl.video.fails }}"
+
+                    <h3 class="modal-title" id="modal-title">Playing - Id: {{ $ctrl.video.id }} - Name: {{ $ctrl.video.name }} - Duration: ({{ $ctrl.video.length.hour }}:{{ $ctrl.video.length.min }}:{{ $ctrl.video.length.sec }})</h3>
+                    <!-- <a class="button" href="#" ng-click="$ctrl.createSWF($event)">Create the SWF</a> -->
+                    <a href="" onclick="toggleVideoDetails()">
+                        <img src="static/images/details.png" class="details-image" width="24px" />
+                    </a>                    
+                </div>
+
+                <div class="modal-body" id="modal-body">
+
+
+                <section id="status" class="video_details" style="display: none;">
+                    <div class="tab-control">
+                      <ul class="tabs clearfix">
+                        <li>
+                          <a class="selected" href="#events">Events</a>
+                        </li>
+                        <li>
+                          <a href="#errorEvents">Error Events</a>
+                        </li>
+                        <li>
+                          <a href="#properties">Properties</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="events">
+
+                      </div>
+                      <div class="tab-content" id="errorEvents">
+
+                      </div>
+                      <div class="tab-content" id="properties">
+                        <table id="propertiesTable">
+                          <tr>
+                            <td colspan="2" class="value" id="propCurrentSrc"></td>
+                          </tr>
+                          <tr>
+                            <td class="prop">currentTime</td>
+                            <td class="value" id="propCurrentTime">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">time</td>
+                            <td class="value" id="propTime">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">defaultPlaybackRate</td>
+                            <td class="value" id="propDefaultPlaybackRate">1</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">duration</td>
+                            <td class="value" id="propDuration">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">ended</td>
+                            <td class="value" id="propEnded">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">paused</td>
+                            <td class="value" id="propPaused">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">muted</td>
+                            <td class="value" id="propMuted">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">volume</td>
+                            <td class="value" id="propVolume">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">seeking</td>
+                            <td class="value" id="propSeeking">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">networkState</td>
+                            <td class="value" id="propNetworkState">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">readyState</td>
+                            <td class="value" id="propReadyState">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">bufferedBytesStart</td>
+                            <td class="value" id="propBufferedBytesStart">0</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">bufferedBytesEnd</td>
+                            <td class="value" id="propBufferedBytesEnd">n/a</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">bytesTotal</td>
+                            <td class="value" id="propBytesTotal">0</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">videoWidth</td>
+                            <td class="value" id="propVideoWidth">0</td>
+                          </tr>
+                          <tr>
+                            <td class="prop">videoHeight</td>
+                            <td class="value" id="propVideoHeight">0</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+            </section>
+
+            <section>
+                <div class="row">
+                    <div class="span4">
+                      <div id="videoPlayerWrapper">
+                        <div id="videoPlayer"></div>
+                      </div>
+                    </div> 
+                </div>
+             </section>
+            </div>
+
+                <div class="modal-footer">
+                
+                    <div class="timer" style="display: inline-block;">
+                        <div style="display: inline-block;" id="videoCurrentTime">00:00</div> / 
+                        <div style="display: inline-block;" id="videoDuration">00:00</div>
+                    </div>
+
+
+                      <div class="row controls" style="display: inline-block;">
+                        <div class="control-buttons">
+                          <a id="btnPause" href="#" style="text-decoration: none;">
+                            <img src="/static/images/pause.png" height="50px" />
+                          </a>
+                          <a id="btnResume" href="#" style="text-decoration: none;">
+                            <img src="/static/images/play.png" height="50px"/>
+                          </a>
+                          <a id="btnSeek10" href="#" style="text-decoration: none;">
+                            <img src="/static/images/forward.png" height="50px" />
+                          </a>
+                          <a id="btnMute" href="#" style="text-decoration: none;">
+                            <img src="/static/images/mute.png" height="50px" />
+                          </a>
+                          <a id="btnEnlarge" href="#" style="text-decoration: none;">
+                            <img src="/static/images/max.png" height="50px"/>
+                          </a> 
+                          <a id="btnReduce" href="#" style="text-decoration: none;">
+                            <img src="/static/images/min.png" height="50px" />
+                          </a>
+                        </div>
+
+                      </div>
+                        <button class="btn btn-warning close-button" type="button" ng-click="$ctrl.cancel()">Close</button>
+                </div>
+            </script>
+
+            <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button> -->
+            <!-- <button type="button" class="btn btn-default" ng-click="event.preventDefault(); $ctrl.open('lg')">Large modal</button> -->
+            <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button> -->
+            <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button> -->
+            <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button> -->
+            <!-- <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div> -->
+        </div>
+
+
+    </body>
+</html>

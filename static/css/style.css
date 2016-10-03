@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+}
+
+/* Videos */
+.player {
+    background-color: black;
+    width: 90%;
+}
+
+.video {
+    margin-top: 50px;
+    width: 33%;
+    display: inline-block;
+}
+
+.info {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.38);
+    color: white;
+    padding: 15px;
+    width: 26.5%;
+    font-size: 12px;
+    font-family: "Futura";
+    width: 28.05%;
+}
+
+.title {
+    font-size: 24px;
+    font-family: "Futura";
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.details-image {
+    float: right;
+    margin-right: 60px;
+    margin-top: 10px;
+}
+
+.controls {
+    margin-left: 9% !important;
+    background: rgba(128, 128, 128, 0.25);
+    display: inline-block;
+    border-radius: 30px;
+    /*width: 300px;*/
+    padding-right: 15px !important;
+    /*padding-left: 10px !important;*/
+}
+
+.controls-large {
+    margin-left: 12% !important;
+}
+
+.control-buttons {
+    padding-left: 18px !important;
+}
+
+.video_details {
+    left: 895px;
+    top: -65px;
+    width: 320px;
+    height: 269px;
+}
+
+.video-details-large {
+    left: 895px !important;
+    top: -65px !important;
+    width: 320px !important;
+    height: 269px !important;
+}
+
+.modal-header {
+    font-family: Futura;
+    font-size: 20px;
+}
+
+.modal-footer {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 78px !important;
+    padding-left: 20px !important;
+    border-top: 1px solid #e5e5e5 !important;
+    background: rgba(217, 217, 217, 0.48);
+    text-align: left !important;
+}
+
+
+.close-button {
+    float: right;
+    padding: 11px !important;
+    margin: 12px !important;
+    font-size: 20px !important;
+    font-family: "Futura";
+    border-radius: 20px !important;
+    outline: none;
+}
+
+.timer {
+    display: inline-block;
+    font-size: 20px;
+    border: 1px solid #d5d5d5;
+    border-radius: 20px;
+    padding: 10px;
+    color: gray;
+    background: #fafafa;
+}
+
+
+/* Header */
+.header-main {
+    margin-top: 0;
+    color: white;
+    /*height: 40px;*/
+    width: 100%;
+    padding: 20px;
+
+    background: #4c4c4c; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    
+    font-family: "Futura";
+    line-height: 26.4px;
+    font-size: 32px;
+    position: fixed;
+}
+
+.header-left {
+    margin-top: 5px;
+    margin-left: 6%;
+    float: left;
+}
+
+.header-right {
+    margin-top: 8px;
+    margin-right: 8%;
+    font-size: 24px;
+    float: right;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.18);
+    color: white;
+    font-family: "Futura";
+    font-size: 24px;
+}
+
+.github, .linkedin, .gmail {
+    padding-left: 50px;
+    color: white;
+    display: inline-block;
+    font-size: 18px;
+}
+
+/* General */
+.main {
+    padding: 50px;
+    padding-top: 75px;
+}
+
+a:link {
+    color: gray;
+}
+
+a:visited {
+    color: darkgray;
+}
+
+a:hover {
+    color: black;
+}
+
+a:active {
+    color: blue;
+}
