@@ -3,9 +3,35 @@ body {
 }
 
 /* Videos */
+@media screen and (min-width: 720px) {
+    .hls-player, .mp4-player {
+        border: 1px solid #cdcbcb;
+        border-radius: 35px;
+        background: white;
+        position: fixed;
+        margin-top: 100px;
+        left: 0;
+    }
+}
+
+.hls-player, .mp4-player {
+    border: 1px solid #cdcbcb;
+    border-radius: 35px;
+    background: white;
+    position: fixed;
+    margin-top: 100px;
+    left: 2%;
+
+    /*display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;*/
+}
+
+
 .player {
     background-color: black;
-    width: 90%;
+    width: 93%;
 }
 
 .video {
@@ -29,13 +55,26 @@ body {
     font-size: 24px;
     font-family: "Futura";
     padding-left: 20px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
+    background: black;
+    color: white;
+    /*border-radius: 20px 20px 0 0;*/
+    margin-bottom: 1px;
+    width: 93%;
+    border-bottom: 1px solid white;
+}
+
+.title-text {
+    padding-bottom: 10px;
 }
 
 .details-image {
     float: right;
     margin-right: 60px;
     margin-top: 10px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: -7px;
 }
 
 .controls {
@@ -49,7 +88,7 @@ body {
 }
 
 .controls-large {
-    margin-left: 12% !important;
+    margin-left: 22% !important;
 }
 
 .control-buttons {
@@ -64,15 +103,20 @@ body {
 }
 
 .video-details-large {
-    left: 895px !important;
-    top: -65px !important;
+    left: 939px !important;
+    top: -90px !important;
     width: 320px !important;
     height: 269px !important;
+    border: 1px solid #b5b5b5;
+    border-radius: 20px;
 }
 
 .modal-header {
-    font-family: Futura;
+    font-family: "Futura";
     font-size: 20px;
+    background: rgba(217, 217, 217, 0.48);
+    border-radius: 31px 31px 0 0;
+    color: #969696;
 }
 
 .modal-footer {
@@ -83,6 +127,11 @@ body {
     border-top: 1px solid #e5e5e5 !important;
     background: rgba(217, 217, 217, 0.48);
     text-align: left !important;
+    border-radius: 0 0 32px 32px;
+}
+
+.modal-title {
+    padding-left: 20px;
 }
 
 
@@ -165,6 +214,24 @@ body {
 .main {
     padding: 50px;
     padding-top: 75px;
+}
+
+.same-line {
+    display: inline-block;
+}
+
+.full-right {
+    float: right;
+    margin-right: -56px;
+    margin-top: -10px;
+}
+
+#status {
+    background: rgba(236, 236, 236, 0.88) !important;
+}
+
+.thumb {
+    margin: -10px 10px 0 10px;
 }
 
 a:link {

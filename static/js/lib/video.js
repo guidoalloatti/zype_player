@@ -143,18 +143,17 @@ function muteVideo(e) {
 }
 
 function enlargePlayer(){
-  console.log("Enlarge!");
-  // e.preventDefault();
-  $("#videoPlayerWrapper").width(860).height(600);
-  $("#status").css("left", 850);
+  // console.log("Enlarge!");
+  $("#videoPlayerWrapper").width(1280).height(720);
+  $("#status").css("left", 1280);
   $(".controls").addClass('controls-large');
   $("#status").addClass('video-details-large')
 }
 
 function reducePlayer(e){
   e.preventDefault();
-  $("#videoPlayerWrapper").width(480).height(270);
-  $("#status").css("left", 550);
+  $("#videoPlayerWrapper").width(854).height(480);
+  $("#status").css("left", 640);
   $(".controls").removeClass('controls-large');
 }
 
