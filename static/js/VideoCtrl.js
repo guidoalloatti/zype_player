@@ -4,7 +4,7 @@ angular.module('zypeApp').controller('VideoCtrl', ['$scope', '$rootScope', funct
 
 
   $scope.playVideo = function(video) {
-    event.preventDefault();
+    // event.preventDefault();
     $scope.currentVideo = video;
     if(video.format == 'HLS') {
       $scope.showHLSPlayer = true;
@@ -79,8 +79,8 @@ angular.module('zypeApp').controller('VideoCtrl', ['$scope', '$rootScope', funct
       length: { hour: 2, min: 40, sec: 57}, 
       fails: [ { hour: 0, min: 01, sec: 30}, { hour: 0, min: 01, sec: 50}, { hour: 0, min: 03, sec: 41}, { hour: 0, min: 15, sec: 31}, { hour: 0, min: 15, sec: 37}, { hour: 0, min: 26, sec: 12} ], 
       format: "MP4", 
-      href: "http://bad-videos.dev.zype.com/video2/erPQbYqt0EcCae8e.mp4",
-      // href: "/videos/erPQbYqt0EcCae8e.mp4",
+      // href: "http://bad-videos.dev.zype.com/video2/erPQbYqt0EcCae8e.mp4",
+      href: "/videos/erPQbYqt0EcCae8e.mp4", // This video is to large, getting it from local
       status: "bad" },
     { name: "Video #5", // BAD
       id: 5,
@@ -89,7 +89,6 @@ angular.module('zypeApp').controller('VideoCtrl', ['$scope', '$rootScope', funct
       fails: [ { hour: 0, min: 0, sec: 06} ], 
       format: "HLS", 
       href: "http://bad-videos.dev.zype.com/video5/dH2vtLGAjHr6bd5w.m3u8",
-      // href: "/videos/dH2vtLGAjHr6bd5w.m3u8",
       status: "bad" },
 
     { name: "Video #1", // GOOD
@@ -98,8 +97,8 @@ angular.module('zypeApp').controller('VideoCtrl', ['$scope', '$rootScope', funct
       length: { hour: 0, min: 28, sec: 16}, 
       fails: [], 
       format: "MP4", 
-      href: "http://bad-videos.dev.zype.com/good-video1/ArduinoTheDocumentary.mp4",
-      // href: "/videos/ArduinoTheDocumentary.mp4",
+      // href: "http://bad-videos.dev.zype.com/good-video1/ArduinoTheDocumentary.mp4",
+      href: "/videos/ArduinoTheDocumentary.mp4", // This video is to large, getting it from local
       status: "good" },
     { name: "Video #2", // GOOD
       id: 7,
@@ -107,8 +106,8 @@ angular.module('zypeApp').controller('VideoCtrl', ['$scope', '$rootScope', funct
       length: { hour: 0, min: 14, sec: 48}, 
       fails: [], 
       format: "MP4", 
-      href: "http://bad-videos.dev.zype.com/good-video2/sintel-2048-stereo.mp4",
-      // href: "/videos/sintel-2048-stereo.mp4",
+      // href: "http://bad-videos.dev.zype.com/good-video2/sintel-2048-stereo.mp4",
+      href: "/videos/sintel-2048-stereo.mp4", // This video is to large, getting it from local
       status: "good" },
     { name: "Video #3", // GOOD
       id: 8,
