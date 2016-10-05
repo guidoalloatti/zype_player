@@ -108,7 +108,7 @@ function createSWF(e){
     name: "videoPlayer"
   };
 
-  swfobject.embedSWF("../../dist/video-js.swf", "videoPlayer", "100%", "100%", "10.3", "", flashvars, params, attributes);
+  swfobject.embedSWF("/static/js/lib/video-js.swf", "videoPlayer", "100%", "100%", "10.3", "", flashvars, params, attributes);
 
 }
 
@@ -119,15 +119,15 @@ function muteVideo(e) {
 }
 
 function enlargePlayer(){
-  $("#videoPlayerWrapper").width(1280).height(720);
-  $("#status").css("left", 1280);
+  $("#videoPlayerWrapper").width(1024).height(640);
+  $("#status").css("left", 1024);
   $(".controls").addClass('controls-large');
   $("#status").addClass('video-details-large')
 }
 
 function reducePlayer(e){
-  $("#videoPlayerWrapper").width(854).height(480);
-  $("#status").css("left", 640);
+  $("#videoPlayerWrapper").width(800).height(500);
+  $("#status").css("left", 800);
   $(".controls").removeClass('controls-large');
 }
 
@@ -140,7 +140,7 @@ function onSWFReady(pObjectID){
 function setProperties(e){
   if (e) e.preventDefault();
   var el = $("#videoPlayer")[0];
-  console.log("setProperties");
+  // console.log("setProperties done!");
 }
 
 function setSource(e){
@@ -148,6 +148,7 @@ function setSource(e){
   var el = $("#videoPlayer")[0];
   var src = $("#video_href").val();
   el.vjs_src(src);
+  // console.log("setSource done!")
 }
 
 function playVideo(e){
@@ -164,7 +165,7 @@ function pauseVideo(e){
 
 function resumeVideo(e){
   var el = $("#videoPlayer")[0];
-  console.log(el);
+  // console.log(el);
   el.vjs_resume();
 }
 
@@ -172,7 +173,7 @@ function seekVideo(seconds){
   var el = $("#videoPlayer")[0];
   var currentTime = $("#propCurrentTime").html();
   var newTime = parseFloat(currentTime) + parseFloat(seconds);
-  console.log(currentTime, newTime);
+  // console.log(currentTime, newTime);
 
   el.vjs_setProperty("currentTime", parseFloat(newTime));
 }

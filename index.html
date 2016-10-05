@@ -33,19 +33,17 @@
 
             <div class="hls-player" ng-show="showHLSPlayer">
               <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">
+                <dvi class="modal-title same-line">
                   Playing - Id: {{ currentVideo.video.id }} - Name: {{ currentVideo.name }} - Duration: ({{ currentVideo.length.hour }}:{{ currentVideo.length.min }}:{{ currentVideo.length.sec }})
                 </h3>
               </div>
 
               <div class="modal-body" id="modal-body">
-                <video id="hls_player" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" 
-            poster="/static/images/image_3.jpeg"
+                <video id="hls_player" class="video-js vjs-default-skin" controls preload="none" width="1024" height="640" poster="/static/images/image_3.jpeg"
                 data-setup='{"techOrder": ["flash"]}'>
-                      <source src="" type='video/mp4' />
-                    </video>
-
-                  <input type="hidden" id="userInput" value="{{ currentVideo.href }}" size="60"> 
+                  <source src="" type='video/mp4' />
+                </video>
+                <input type="hidden" id="userInput" value="{{ currentVideo.href }}" size="60"> 
               </div>
 
               <div class="modal-footer">
@@ -60,7 +58,7 @@
                 <input type="hidden" id="video_length" value="{{ currentVideo.length.hour }}:{{ currentVideo.length.min }}:{{ currentVideo.length.sec }}" />
                 <input type="hidden" id="video_issues" value="{{ currentVideo.fails }}" />
 
-                <div class="modal-title same-line" id="modal-title">
+                <div class="modal-title same-line">
                   Playing - Id: {{ currentVideo.video.id }} - Name: {{ currentVideo.name }} - Duration: ({{ currentVideo.length.hour }}:{{ currentVideo.length.min }}:{{ currentVideo.length.sec }})
                 </div>
 

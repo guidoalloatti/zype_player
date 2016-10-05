@@ -100,8 +100,8 @@ body {
 }
 
 .video-details-large {
-    left: 939px !important;
-    top: -90px !important;
+    left: 1054px !important;
+    /*top: -90px !important;*/
     width: 320px !important;
     height: 269px !important;
     border: 1px solid #b5b5b5;
