@@ -9,7 +9,7 @@ Installation
 ```bash
     npm install
    ```
-2. Compile SWF.
+2. Compile SWF. (optional)
 Development (places new SWF in /dist/):
 ```bash
     grunt mxmlc

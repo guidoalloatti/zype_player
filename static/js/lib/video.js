@@ -1,95 +1,76 @@
+var video = angular.element(document.getElementById('ngVideo')).scope();
+
 function init() {
 
-  // control
+  /*
+   * Controls definitions
+   */
   $("#btnMute").click(muteVideo);
   $("#btnEnlarge").click(enlargePlayer);
   $("#btnReduce").click(reducePlayer);
   $("#btnPause").click(pauseVideo);
   $("#btnResume").click(resumeVideo);
-  $("#btnSeek10").click(
+  $("#btnSeek10").click(function(){ seekVideo(10); });
+
+  $(".tab-control").each(
     function(){
-      seekVideo(10);
+      var $tabControl = $(this);
+      $tabControl.find("ul.tabs a").click(
+        function(e){
+          e.preventDefault();
+          var $this = $(this);
+          var targetID = $this.attr("href").substring(1);
+          $this.parent().siblings().each(
+            function(){ $(this).find("a").toggleClass("selected", false); }
+          );
+          $this.toggleClass("selected", true);
+          $tabControl.find("div.tab-content").each(
+            function(){
+              if($(this).attr("id") == targetID) $(this).show();
+              else $(this).hide();
+            }
+          );
+        }
+      );
+      // show the first tab content item, and hide the rest
+      $tabControl.find("div.tab-content").each(
+        function(pIndex, pElement){
+         if(pIndex != 0) $(pElement).hide();
+         else $(pElement).show();
+        }
+      );
     }
   );
 
-  $(".tab-control").each(
-      function(){
-        var $tabControl = $(this);
-        // tabs
-        $tabControl.find("ul.tabs a").click(
-          function(e){
-            e.preventDefault();
-            var $this = $(this);
-            var targetID = $this.attr("href").substring(1);
-            $this.parent().siblings().each(
-              function(){
-                $(this).find("a").toggleClass("selected", false);
-              }
-            );
-            $this.toggleClass("selected", true);
-            $tabControl.find("div.tab-content").each(
-              function(){
-                if($(this).attr("id") == targetID){
-                  $(this).show();
-                }
-                else{
-                  $(this).hide();
-                }
-              }
-            );
-          }
-        );
-        // show the first tab content item, and hide the rest
-        $tabControl.find("div.tab-content").each(
-          function(pIndex, pElement){
-           if(pIndex != 0){
-             $(pElement).hide();
-           }
-           else{
-             $(pElement).show();
-           }
-          }
-        );
-      }
-    );
-
-    // to avoid a bunch of lookups every 100ms, let's cache some elements in horrible
-    // global vars for the properties table
-    $propCurrentSrc = $("#propCurrentSrc");
-    $propCurrentTime = $("#propCurrentTime");
-    $propTime = $("#propTime");
-    $propDefaultPlaybackRate = $("#propDefaultPlaybackRate");
-    $propDuration = $("#propDuration");
-    $propEnded = $("#propEnded");
-    $propPaused = $("#propPaused");
-    $propMuted = $("#propMuted");
-    $propVolume = $("#propVolume");
-    $propSeeking = $("#propSeeking");
-    $propNetworkState = $("#propNetworkState");
-    $propReadyState = $("#propReadyState");
-    $propBufferedBytesStart = $("#propBufferedBytesStart");
-    $propBufferedBytesEnd = $("#propBufferedBytesEnd");
-    $propBytesTotal = $("#propBytesTotal");
-    $propVideoWidth = $("#propVideoWidth");
-    $propVideoHeight = $("#propVideoHeight");
-
+  // to avoid a bunch of lookups every 100ms, let's cache some elements in horrible
+  // global vars for the properties table
+  $propCurrentSrc = $("#propCurrentSrc");
+  $propCurrentTime = $("#propCurrentTime");
+  $propTime = $("#propTime");
+  $propDefaultPlaybackRate = $("#propDefaultPlaybackRate");
+  $propDuration = $("#propDuration");
+  $propEnded = $("#propEnded");
+  $propPaused = $("#propPaused");
+  $propMuted = $("#propMuted");
+  $propVolume = $("#propVolume");
+  $propSeeking = $("#propSeeking");
+  $propNetworkState = $("#propNetworkState");
+  $propReadyState = $("#propReadyState");
+  $propBufferedBytesStart = $("#propBufferedBytesStart");
+  $propBufferedBytesEnd = $("#propBufferedBytesEnd");
+  $propBytesTotal = $("#propBytesTotal");
+  $propVideoWidth = $("#propVideoWidth");
+  $propVideoHeight = $("#propVideoHeight");
 }
 
 function log(msg){
-  try{
+  try {
     console.log(msg);
   }
   catch(error){}
 }
 
 function setupAndPlayback(e) {
-  var modal = angular.element(document.getElementById('ngModal')).scope();
-  var video = angular.element(document.getElementById('ngVideo')).scope();
-
-  console.log("Scope!");
-  console.log(modal);
-  console.log(video);
-
   createSWF(e);
   setTimeout(waitForSWF, 100);
 }
@@ -109,14 +90,9 @@ function waitForSWF() {
 
 function createSWF(e){
   $("#status").addClass('video-details-large')
-  if (e) {
-    e.preventDefault();
-  }
+  if (e) e.preventDefault();
 
   var flashvars = {
-    // readyFunction: "onSWFReady",
-    // eventProxyFunction: "onSWFEvent",
-    // errorEventProxyFunction: "onSWFErrorEvent",
     src: "",
     autoplay: false,
     preload: 'none',
@@ -143,7 +119,6 @@ function muteVideo(e) {
 }
 
 function enlargePlayer(){
-  // console.log("Enlarge!");
   $("#videoPlayerWrapper").width(1280).height(720);
   $("#status").css("left", 1280);
   $(".controls").addClass('controls-large');
@@ -151,7 +126,6 @@ function enlargePlayer(){
 }
 
 function reducePlayer(e){
-  e.preventDefault();
   $("#videoPlayerWrapper").width(854).height(480);
   $("#status").css("left", 640);
   $(".controls").removeClass('controls-large');
@@ -164,26 +138,20 @@ function onSWFReady(pObjectID){
 }
 
 function setProperties(e){
-  if (e) {
-    e.preventDefault();
-  }
+  if (e) e.preventDefault();
   var el = $("#videoPlayer")[0];
-  // el.vjs_setProperty("eventProxyFunction", "onSWFEvent");
-  // el.vjs_setProperty("errorEventProxyFunction", "onSWFErrorEvent");
+  console.log("setProperties");
 }
 
 function setSource(e){
   if (e) e.preventDefault();
   var el = $("#videoPlayer")[0];
   var src = $("#video_href").val();
-  // console.log(src);
   el.vjs_src(src);
 }
 
 function playVideo(e){
-  if (e) {
-    e.preventDefault();
-  }
+  if (e) e.preventDefault();
   var el = $("#videoPlayer")[0];
   el.vjs_play();
   enlargePlayer(e);
@@ -196,14 +164,13 @@ function pauseVideo(e){
 
 function resumeVideo(e){
   var el = $("#videoPlayer")[0];
+  console.log(el);
   el.vjs_resume();
 }
 
 function seekVideo(seconds){
   var el = $("#videoPlayer")[0];
   var currentTime = $("#propCurrentTime").html();
-  // console.log(currentTime);
-  // el.vjs_setProperty("currentTime", seconds);
   var newTime = parseFloat(currentTime) + parseFloat(seconds);
   console.log(currentTime, newTime);
 
@@ -223,12 +190,9 @@ function onSWFEvent(swfID, eventName){
   $el.append(pad2(time.getHours()) + ":" + pad2(time.getMinutes()) + ":" + pad2(time.getSeconds()) + " - " + eventName + "<br/>");
   $el[0].scrollTop = $el[0].scrollHeight;
 
-  if(eventName == "playing" || eventName == "resume"){
-    $("#control").show();
-  }
-  else if(eventName == "ended"){
-    replay();
-  }
+  if(eventName == "playing" || eventName == "resume") $("#control").show();
+  else if(eventName == "ended") replay();
+  
 }
 
 function onSWFErrorEvent(swfID,eventName){
@@ -246,8 +210,10 @@ function pad2(num) {
    return (num < 10 ? '0' : '') + num;
 }
 
+/*
+ * This method runs every time and updates the video properties 
+ */
 function updatePlayerProperties(){
-  console.log("updatePlayerProperties");
   var el = $("#videoPlayer")[0];
 
   var totalSec = el.vjs_getProperty("duration");
@@ -264,6 +230,26 @@ function updatePlayerProperties(){
   result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
   $("#videoCurrentTime").html(result);
 
+  /* 
+   * Checking if there are fails in the video and skipping forward if the fail is reached
+   */
+  if(video.currentVideo.fails.length > 0) {
+    $.each(video.currentVideo.fails, function(fail) {
+      var fail_time = (this.hour < 10 ? "0" + this.hour : this.hour) 
+              + ":" + (this.min < 10 ? "0" + this.min : this.min) 
+              + ":" + (this.sec  < 10 ? "0" + this.sec : this.sec);
+      if(result == fail_time) seekVideo(30);
+
+    });
+  }
+
+  var bufferKB = parseInt(el.vjs_getProperty("bufferedBytesEnd")/1024);
+  var bufferMB = parseInt(bufferKB/1024);
+  $("#currentBuffer").html("Buffered: " + bufferMB + " MB");
+
+  /*
+   * This are the video properties being refreshed in the frontend
+   */
   $propCurrentSrc.html(el.vjs_getProperty("currentSrc"));
   $propCurrentTime.html(el.vjs_getProperty("currentTime"));
   $propTime.html(el.vjs_getProperty("time"));

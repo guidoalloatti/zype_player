@@ -1,4 +1,4 @@
-videojs.options.flash.swf = "video-js.swf";
+videojs.options.flash.swf = "/static/js/lib/video-js.swf";
 
 function userSubmit() {
     loadStream(document.getElementById('userInput').value);
