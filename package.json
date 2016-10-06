@@ -33,6 +33,7 @@
     "video.js": "^5.11.7"
   },
   "scripts": {
+    "start": "grunt connect:dev",
     "version": "chg release -y && grunt dist && git add -f dist/ && git add CHANGELOG.md"
   }
 }
